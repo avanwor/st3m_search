@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pullWords = require('./readfile.js')
+const axios = require('axios');
+const pullWords = require('./readfile')
+const key = require('../key')
+
 
 const app = express();
 const port = 3008;
@@ -18,7 +21,14 @@ let dictionary = pullWords.pullWords()
 
 app.get('/api', (req, res) => {
     console.log('on server', req.query.input)
-    res.end(JSON.stringify('hey from server'))
+    //check if that word is in the dictionary
+    //if yes, perfor, the giphy search
+    //set up the giphy request
+    axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${req.query.input}&limit=5`)
+        .then(gifs => {
+            console.log(gifs.data.data)
+            res.end(JSON.stringify(gifs.data.data))
+        })
 });
 
 
