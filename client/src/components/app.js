@@ -28,13 +28,11 @@ class App extends Component {
     }
 
     handleChange(e) {
-        let val = e.target.value.toLowerCase();
-        
-        this.setState({ input: val });
+        this.setState({ input: e.target.value });
     }
 
     handleSubmit() {
-        let fixed = AutoCorrect(this.state.input)
+        let fixed = AutoCorrect(this.state.input.toLowerCase())
         console.log(fixed)
     }
 
