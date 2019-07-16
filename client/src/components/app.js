@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
+import Search from './Search'
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            intro: 'Hello'
+            input: ''
         }
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         //make api call
     }
 
+    handleChange(e) {
+        let val = e.target.value.toLowerCase();
+        
+        this.setState({ input: val });
+      }
+
     render() {
-        return <div>{this.state.intro} from app.js</div>
+        let { input } = this.state;
+        return (
+            <Search value={input} handleChange={this.handleChange} />
+        )
     }
 };
 
