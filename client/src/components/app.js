@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Search from './Search'
 import Key from './Key'
 import Result from './Result'
-import AutoCorrect from './AutoCorrect'
 
 class App extends Component {
     constructor(props) {
@@ -32,8 +31,10 @@ class App extends Component {
     }
 
     handleSubmit() {
-        let fixed = AutoCorrect(this.state.input.toLowerCase())
-        console.log(fixed)
+        //remove non-letter characters. Though most autocorrect is happening on server, this function isn't resource intensive, and helps block code injections. 
+        let lettersOnly = this.state.input.toLowerCase().replace(/[^a-z]/gi, '')
+        console.log(lettersOnly)
+        //make post request to server with letters only
     }
 
     render() {
