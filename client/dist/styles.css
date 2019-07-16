@@ -40,3 +40,13 @@
   input:focus {
     outline: none;
   }
+
+  .result {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .giphy {
+    padding: 20px;
+  }
