@@ -23,7 +23,9 @@ class App extends Component {
     render() {
         let { input } = this.state;
         return (
-            <Search value={input} handleChange={this.handleChange} />
+            <div className="container">
+                <Search value={input} handleChange={this.handleChange} />
+            </div>
         )
     }
 };
