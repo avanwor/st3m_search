@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from './Search'
 import Key from './Key'
 import Result from './Result'
+import AutoCorrect from './AutoCorrect'
 
 class App extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class App extends Component {
             gifs: []
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -29,13 +31,18 @@ class App extends Component {
         let val = e.target.value.toLowerCase();
         
         this.setState({ input: val });
-      }
+    }
+
+    handleSubmit() {
+        let fixed = AutoCorrect(this.state.input)
+        console.log(fixed)
+    }
 
     render() {
         let { input, gifs } = this.state;
         return (
             <div className="container">
-                <Search value={input} handleChange={this.handleChange} />
+                <Search value={input} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 <Result results={gifs} />
             </div>
         )
