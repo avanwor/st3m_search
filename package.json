@@ -1,0 +1,45 @@
+{
+  "name": "andyreactapptemplate",
+  "version": "1.0.0",
+  "description": "React SPA with two carousels displaying third party API data",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack -d --watch",
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avanwor/AndyReactAppTemplate.git"
+  },
+  "author": "Andy Van Wormer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avanwor/AndyReactAppTemplate/issues"
+  },
+  "homepage": "https://github.com/avanwor/AndyReactAppTemplate#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.5"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
+  }
+}
