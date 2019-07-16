@@ -12,4 +12,6 @@ let dictionary = pullWords.pullWords()
 //create post listener, and send array of possible correct user input to bst dictionary. 
     //I like the idea of running cat cet cit cot cut on a multithreaded approach to search the array. Maybe run each on a promise?
 
+// app.post()
+
 app.listen(port,() => console.log('serving at port ' + port));

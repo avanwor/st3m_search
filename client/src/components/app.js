@@ -26,11 +26,11 @@ class App extends Component {
             //catch some errors!!! (try with invalid API key)
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({ input: e.target.value });
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
         //remove non-letter characters. Though most autocorrect is happening on server, this function isn't resource intensive, and helps block code injections. 
         let lettersOnly = this.state.input.toLowerCase().replace(/[^a-z]/gi, '')
         console.log(lettersOnly)
