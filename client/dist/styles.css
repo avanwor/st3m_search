@@ -34,11 +34,22 @@
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 10px;
+      border-radius: 5px 0 0 5px;
+      border-right: none;
   }
 
   input:focus {
     outline: none;
+  }
+
+  .search button {
+    width: 60px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background: #2196F3;
+    color: #fff;
+    cursor: pointer;
   }
 
   .result {
