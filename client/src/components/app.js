@@ -14,25 +14,12 @@ class App extends Component {
     }
 
     componentDidMount() {
-        //beginning, maybe just pull a gif related to searching? 'search and you will find'
-        //probably just fetch latest popular search terms here, 200 of them?
-        // axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${key.key}&limit=2`)
-        //     .then((res) => {
-        //         this.setState({
-        //             gifs: res.data.data
-        //         })
-        //     })
-        //     .then(() => console.log('component mounted state', this.state.gifs))
-        //     //++catch some errors!!! (try with invalid API key)
-
         this.setState({
             gifs: [{
                 embed_url: "https://giphy.com/embed/ukZYbNQaVmdGjeLf6U",
                 id: "ukZYbNQaVmdGjeLf6U"
             }]
         })
-
-            //<iframe src="https://giphy.com/embed/ukZYbNQaVmdGjeLf6U" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nbpa-nba-players-association-pa-ukZYbNQaVmdGjeLf6U">via GIPHY</a></p>
     }
 
     handleChange = (e) => {

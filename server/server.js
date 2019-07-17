@@ -31,13 +31,14 @@ app.get('/api', (req, res) => {
         //does this make a huge copy of the dict? It's a lot of memory, but it's also just on the server, it's still constant space
         input = findWord.findWord(input,dict)
         
-        if (!input) res.end(JSON.stringify([]))
+        if (!input) res.end(JSON.stringify(null))
     }
 
     console.log('from find word function:', input)
     //spaces are supported
     axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=5`)
         .then(gifs => {
+            console.log(gifs.data.data)
             res.end(JSON.stringify(gifs.data.data))
         })
 });

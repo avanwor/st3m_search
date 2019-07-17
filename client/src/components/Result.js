@@ -2,6 +2,10 @@ import React from 'react';
 
 const Result = ({ results }) => {
 
+    if (!results) {
+        return <div>No Results! Search again</div>
+    }
+
     return (
         <div className="result">
             {results.length &&
