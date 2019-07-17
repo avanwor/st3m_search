@@ -22,22 +22,23 @@ const dict = fs.readFileSync('./server/unix_words','utf8')
 app.get('/api', (req, res) => {
     let input = req.query.input
 
-    if (dict.indexOf(input) === -1) {
-        console.log('checking other words')
+    //++should spaces be included in search?
+    input = input.toLowerCase().replace(/[^a-z ]/gi, '').split(' ').filter(ele => ele.length && ele).join(' ')
+    //let lettersOnly = this.state.input.toLowerCase().replace(/[^a-z ]/gi, '')
+    
 
+    if (dict.indexOf(input) === -1) {
         //does this make a huge copy of the dict? It's a lot of memory, but it's also just on the server, it's still constant space
         input = findWord.findWord(input,dict)
         
         if (!input) res.end(JSON.stringify([]))
-    } 
-    console.log('index',dict.indexOf(input))
-    console.log('word at index',dict[54533])
+    }
+
     console.log('from find word function:', input)
     axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=5`)
         .then(gifs => {
             res.end(JSON.stringify(gifs.data.data))
         })
 });
-
 
 app.listen(port,() => console.log('serving at port ' + port));

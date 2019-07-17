@@ -31,21 +31,13 @@ class App extends Component {
     }
 
     handleSubmit = () => {
-        //remove non-letter characters. Though most autocorrect is happening on server, this function isn't resource intensive, and helps block code injections. 
-        //let lettersOnly = this.state.input.toLowerCase().replace(/[^a-z ]/gi, '')
-
-        //remove non-letter characters besides spaces
-        let lettersOnly = this.state.input.toLowerCase().replace(/[^a-z ]/gi, '').split(' ').filter(ele => ele.length && ele).join(' ')
-        //++should spaces be included in search?
-
-        fetch(`http://localhost:3008/api?input=${lettersOnly}`)
+        fetch(`http://localhost:3008/api?input=${this.state.input}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            //if data is falsy, generate an no results
+            //if data is falsy, generate a no results message
             this.setState({gifs: data})
         })
-
         //event.preventDefault();
     }
 
