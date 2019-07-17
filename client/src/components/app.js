@@ -16,7 +16,7 @@ class App extends Component {
     componentDidMount() {
         //beginning, maybe just pull a gif related to searching? 'search and you will find'
         //probably just fetch latest popular search terms here, 200 of them?
-        axios.get(`http://api.giphy.com/v1/gifs/trending?api_key=${key.key}&limit=2`)
+        axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${key.key}&limit=2`)
             .then((res) => {
                 this.setState({
                     gifs: res.data.data
@@ -42,6 +42,7 @@ class App extends Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            //if data is falsy, generate an no results
             this.setState({gifs: data})
         })
 

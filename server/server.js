@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const axios = require('axios');
-const pullWords = require('./readfile')
+const findWord = require('./findword.js')
 const key = require('../key')
 
 
@@ -13,20 +14,27 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + './../client/dist'));
 
-//Pull words from a dictionary file into memory
-let dictionary = pullWords.pullWords()
+//Pull words from a dictionary file into memory.
+//++ edge case where server restarts and user makes a request immeditaely before 
+const dict = fs.readFileSync('./server/unix_words','utf8')
 
-//create post listener, and send array of possible correct user input to bst dictionary. 
-    //I like the idea of running cat cet cit cot cut on a multithreaded approach to search the array. Maybe run each on a promise?
-
+//++I like the idea of running cat cet cit cot cut on a multithreaded approach to search the array. Maybe run each on a promise?
 app.get('/api', (req, res) => {
-    console.log('on server', req.query.input)
-    //check if that word is in the dictionary
-    //if yes, perfor, the giphy search
-    //set up the giphy request
-    axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${req.query.input}&limit=5`)
+    let input = req.query.input
+
+    if (dict.indexOf(input) === -1) {
+        console.log('checking other words')
+
+        //does this make a huge copy of the dict? It's a lot of memory, but it's also just on the server, it's still constant space
+        input = findWord.findWord(input,dict)
+        
+        if (!input) res.end(JSON.stringify([]))
+    } 
+    console.log('index',dict.indexOf(input))
+    console.log('word at index',dict[54533])
+    console.log('from find word function:', input)
+    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=5`)
         .then(gifs => {
-            console.log(gifs.data.data)
             res.end(JSON.stringify(gifs.data.data))
         })
 });
