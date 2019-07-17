@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const axios = require('axios');
 const findWord = require('./findword.js')
-const key = require('../key')
+const key = require('./key')
 
 
 const app = express();

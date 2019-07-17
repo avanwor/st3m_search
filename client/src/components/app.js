@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import Search from './Search'
-import key from '../../../key'
 import Result from './Result'
 
 class App extends Component {
