@@ -35,6 +35,7 @@ app.get('/api', (req, res) => {
     }
 
     console.log('from find word function:', input)
+    //spaces are supported
     axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=5`)
         .then(gifs => {
             res.end(JSON.stringify(gifs.data.data))
