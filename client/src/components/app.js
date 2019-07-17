@@ -23,23 +23,24 @@ class App extends Component {
     }
 
     handleChange = (e) => {
+        e.preventDefault();
         this.setState({ input: e.target.value });
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault();
         let { input } = this.state;
 
         fetch(`http://localhost:3008/api?input=${input}`)
         .then(res => res.json())
         .then(({data,corrected}) => {
+            //if the server autocorrects the input, put the corrected input into state
             let showing = corrected === input ? '' : corrected
             this.setState({
                 gifs: data,
                 showing: showing
             })
         })
-        
-        //event.preventDefault();
     }
 
     render() {
