@@ -29,19 +29,18 @@ class App extends Component {
     }
 
     handleSubmit = () => {
-        fetch(`http://localhost:3008/api?input=${this.state.input}`)
+        let { input } = this.state;
+
+        fetch(`http://localhost:3008/api?input=${input}`)
         .then(res => res.json())
-        //can i destructure here? {data,corrected}
-        .then(data => {
-            console.log('data from server', data)
-            //if data is falsy, generate a no results message
-            let showing = data.corrected === this.state.input ? '' : data.corrected
+        .then(({data,corrected}) => {
+            let showing = corrected === input ? '' : corrected
             this.setState({
-                gifs: data.data,
+                gifs: data,
                 showing: showing
             })
         })
-        .then(console.log('state after submit', this.state.gifs))
+        
         //event.preventDefault();
     }
 
