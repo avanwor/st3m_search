@@ -1,18 +1,23 @@
 import React from 'react';
 
-const Result = ({ results }) => {
+const Result = ({ gifs, showing }) => {
 
-    if (!results) {
-        return <div>No Results! Search again</div>
+    if (!gifs) {
+        return <div>No gifs! Search again</div>
     }
 
     return (
-        <div className="result">
-            {results.length &&
-                results.map(ele => {
-                    return <iframe src={ele.embed_url} frameBorder="0" className="giphy" key={ele.id}></iframe>
-                })
+        <div className="showing">
+            {showing && 
+                <div>Showing results for: {showing}</div>
             }
+            <div className="result">
+                {gifs.length &&
+                    gifs.map(ele => {
+                        return <iframe src={ele.embed_url} frameBorder="0" className="giphy" key={ele.id}></iframe>
+                    })
+                }
+            </div>
         </div>
     );
 };

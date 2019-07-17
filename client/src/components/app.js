@@ -9,11 +9,13 @@ class App extends Component {
         super(props)
         this.state = {
             input: '',
-            gifs: []
+            gifs: [],
+            showing: '',
         }
     }
 
     componentDidMount() {
+        //after loading initial page, load a gif to help user find search bar
         this.setState({
             gifs: [{
                 embed_url: "https://giphy.com/embed/ukZYbNQaVmdGjeLf6U",
@@ -29,20 +31,26 @@ class App extends Component {
     handleSubmit = () => {
         fetch(`http://localhost:3008/api?input=${this.state.input}`)
         .then(res => res.json())
+        //can i destructure here? {data,corrected}
         .then(data => {
-            console.log(data)
+            console.log('data from server', data)
             //if data is falsy, generate a no results message
-            this.setState({gifs: data})
+            let showing = data.corrected === this.state.input ? '' : data.corrected
+            this.setState({
+                gifs: data.data,
+                showing: showing
+            })
         })
+        .then(console.log('state after submit', this.state.gifs))
         //event.preventDefault();
     }
 
     render() {
-        let { input, gifs } = this.state;
+        let { input, gifs, showing } = this.state;
         return (
             <div className="container">
                 <Search value={input} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-                <Result results={gifs} />
+                <Result gifs={gifs} showing={showing}/>
             </div>
         )
     }
