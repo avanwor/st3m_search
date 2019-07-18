@@ -39,13 +39,16 @@ class App extends Component {
         })
     }
 
-    imgOnClick = (id) => {
-        
-        console.log(typeof id)
+    imgOnClick = (url) => {
         this.setState({ 
-            clicked: id
+            clicked: url
         })
-        
+    }
+
+    removeOverlay = () => {
+        this.setState({ 
+            clicked: ''
+        })
     }
 
     render() {
@@ -53,7 +56,7 @@ class App extends Component {
         return (
             <div className="container">
                 <Search handleSubmit={this.handleSubmit}/>
-                <Result gifs={gifs} imgOnClick={this.imgOnClick} showing={showing} clicked={clicked}/>
+                <Result gifs={gifs} imgOnClick={this.imgOnClick} showing={showing} clicked={clicked} removeOverlay={this.removeOverlay}/>
             </div>
         )
     }

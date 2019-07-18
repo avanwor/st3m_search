@@ -5,6 +5,8 @@
   
   body {
     background-color: rgb(234, 242, 254);
+    /* position: relative;
+    z-index: 1; */
   }
   
   .container {
@@ -27,7 +29,6 @@
     width: 30px;
     height: 30px;
     padding-right: 10px;
-    
   }
 
   .input {
@@ -71,4 +72,23 @@
     color: grey;
     position: relative;
     z-index: 1;
+  }
+
+  .overlay {
+    height: 100vh;
+    width: 100vw;
+    top:0;
+    background-color: black;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .OverlayGif {
+    position: relative;
+    top: 25%;
+    z-index: 11;
+    margin: auto;
+    opacity: 1;
   }
