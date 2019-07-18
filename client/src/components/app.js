@@ -26,12 +26,13 @@ class App extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const input = formData.get("input")
-        console.log('input',input)
+        const input = formData.get("input").toLowerCase()
+        
         fetch(`http://localhost:3008/api?input=${input}`)
         .then(res => res.json())
         .then(({data,corrected}) => {
             //if the server autocorrects the input, put the corrected input into state
+            console.log(data,corrected)
             const showing = corrected === input ? '' : corrected
             this.setState({
                 gifs: data,
@@ -41,15 +42,11 @@ class App extends React.Component {
     }
 
     imgOnClick = (url) => {
-        this.setState({ 
-            clicked: url
-        })
+        this.setState({ clicked: url })
     }
 
     removeOverlay = () => {
-        this.setState({ 
-            clicked: ''
-        })
+        this.setState({ clicked: ''})
     }
 
     render() {
