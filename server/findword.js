@@ -1,5 +1,4 @@
-//note: this function is far from optimal. It's an mvp
-//Dict is an array of 2m dictionary words 
+//note: this function needs further optimization 
 const findWord = (input, dict) => {
 
     const vowels = {
@@ -12,10 +11,9 @@ const findWord = (input, dict) => {
 
     let possibleWords = {}
 
-    //++anyway to keep one vowel variable at a time (assume only one typo, then two, then three), then search on those sets?
-    //++check out fib tabulation for fast algo
+    //possible upgrade when time allows - fib tabulation may be faster than recursion
     const recurseWord = (word, i=0) => {
-        //limit the function to handle 5 vowels to prevent server from overloading and stay within acceptable response time
+        //limit the function to handle 5 vowels (5^5) to stay within acceptable response time
         if (Object.keys(possibleWords).length > 3125) {
             i = word.length + 1
         }
@@ -23,21 +21,20 @@ const findWord = (input, dict) => {
         if (vowels[word[i]]) {
             for (let key in vowels) {
                 let changedVowel = word.substring(0,i) + key + word.substring(i+1)
-                //++any more logical way to prevent duplicates? to avoid running indexOf (increasing time) i set possibleWords from an array to object. 
+                //possible upgrade when time allows - think of more logical way to prevent duplicates
                 if (!possibleWords[changedVowel]) possibleWords[changedVowel] = 1
                 recurseWord(changedVowel,i+1)
             }
-            //++limit should be set on client side, (perhaps on server side as well to avoid overloading server)
-        } else if (i < 50) {
+        } else {
             recurseWord(word,i+1)
         }
     }
 
     recurseWord(input)
 
-    //++can I just put the dictionary into an object, instead of an array?
     for (let word in possibleWords) {
-        //This needs to be a binary search (since dict is sorted), but considering loading dict into postgres to take advantage of btree indexing
+        //This needs to be a binary search (since dict is sorted). Also could load dict into postgres and take advantage of btree index
+        //Also, with more time, look into workers that could run multiple searches at same time. 
         if (dict.indexOf(word) !== -1) {
             return word
         }

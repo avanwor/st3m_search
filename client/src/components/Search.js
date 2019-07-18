@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Search = ({ handleSubmit }) => {
-    //return a search bar that contains an image (logo), an input (search field), and a button to send request
+    //return a search bar that contains a pre loaded image (logo), an input (search field), and a button to send requests
     return (
       <form className="search" onSubmit={handleSubmit}>
           <img src="https://st3m.s3-us-west-1.amazonaws.com/Appstemlogo.png"></img>

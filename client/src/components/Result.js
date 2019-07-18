@@ -2,6 +2,7 @@ import React from 'react';
 
 const Result = ({ gifs, imgOnClick, showing, clicked, removeOverlay }) => {
 
+    //if the gifs field is empty, display no gifs were found
     if (!gifs) {
         return <div>No gifs! Search again</div>
     }
@@ -13,11 +14,6 @@ const Result = ({ gifs, imgOnClick, showing, clicked, removeOverlay }) => {
                 <div className="overlay" onClick={removeOverlay}>
                     <iframe src={clicked} frameBorder="0" className="OverlayGif"></iframe>
                 </div>
-                //need to get the image and opaque the background
-                //filter on state for the ele.id
-
-                //lay an opaque div overtop
-                
             }
             
             {//if there's an autocorrect, show the corrected term
