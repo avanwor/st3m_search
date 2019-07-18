@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Search from './Search'
 import Result from './Result'
+import ErrorBoundary from './Error'
 
-class App extends Component {
+class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -54,10 +55,12 @@ class App extends Component {
     render() {
         const { gifs, showing, clicked } = this.state;
         return (
-            <div className="container">
-                <Search handleSubmit={this.handleSubmit}/>
-                <Result gifs={gifs} imgOnClick={this.imgOnClick} showing={showing} clicked={clicked} removeOverlay={this.removeOverlay}/>
-            </div>
+            <ErrorBoundary>
+                <div className="container">
+                    <Search handleSubmit={this.handleSubmit}/>
+                    <Result gifs={gifs} imgOnClick={this.imgOnClick} showing={showing} clicked={clicked} removeOverlay={this.removeOverlay}/>
+                </div>
+            </ErrorBoundary>
         )
     }
 };
