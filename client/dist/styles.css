@@ -60,6 +60,8 @@
   }
   .giphy {
     padding: 20px;
+    position: relative;
+    z-index: -1;
   }
 
   .showing {
@@ -67,4 +69,6 @@
     text-align: center;
     font-style: italic;
     color: grey;
+    position: relative;
+    z-index: 1;
   }

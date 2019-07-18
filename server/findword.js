@@ -1,4 +1,5 @@
-//note this function is far from optimal. It's an mvp
+//note: this function is far from optimal. It's an mvp
+//Dict is an array of 2m dictionary words 
 const findWord = (input, dict) => {
 
     const vowels = {
@@ -12,6 +13,7 @@ const findWord = (input, dict) => {
     let possibleWords = {}
 
     //++anyway to keep one vowel variable at a time (assume only one typo, then two, then three), then search on those sets?
+    //++check out fib tabulation for fast algo
     const recurseWord = (word, i=0) => {
         if (i >= word.length) {
             return
@@ -31,8 +33,9 @@ const findWord = (input, dict) => {
 
     recurseWord(input)
 
-    //++can I just put the dictionary into an object?
+    //++can I just put the dictionary into an object, instead of an array?
     for (let word in possibleWords) {
+        //This needs to be a binary search (since dict is sorted), but considering loading dict into postgres to take advantage of btree indexing
         if (dict.indexOf(word) !== -1) {
             return word
         }

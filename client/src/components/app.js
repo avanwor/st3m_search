@@ -6,9 +6,9 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            input: '',
             gifs: [],
             showing: '',
+            clicked: ''
         }
     }
 
@@ -22,20 +22,16 @@ class App extends Component {
         })
     }
 
-    handleChange = (e) => {
-        e.preventDefault();
-        this.setState({ input: e.target.value });
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
-        let { input } = this.state;
-
+        const formData = new FormData(e.target);
+        const input = formData.get("input")
+        console.log('input',input)
         fetch(`http://localhost:3008/api?input=${input}`)
         .then(res => res.json())
         .then(({data,corrected}) => {
             //if the server autocorrects the input, put the corrected input into state
-            let showing = corrected === input ? '' : corrected
+            const showing = corrected === input ? '' : corrected
             this.setState({
                 gifs: data,
                 showing: showing
@@ -43,12 +39,21 @@ class App extends Component {
         })
     }
 
+    imgOnClick = (id) => {
+        
+        console.log(typeof id)
+        this.setState({ 
+            clicked: id
+        })
+        
+    }
+
     render() {
-        let { input, gifs, showing } = this.state;
+        const { gifs, showing, clicked } = this.state;
         return (
             <div className="container">
-                <Search value={input} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-                <Result gifs={gifs} showing={showing}/>
+                <Search handleSubmit={this.handleSubmit}/>
+                <Result gifs={gifs} imgOnClick={this.imgOnClick} showing={showing} clicked={clicked}/>
             </div>
         )
     }
