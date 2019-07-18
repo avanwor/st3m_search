@@ -28,7 +28,8 @@ class App extends React.Component {
         const formData = new FormData(e.target);
         const input = formData.get("input").toLowerCase()
         
-        fetch(`http://localhost:3008/api?input=${input}`)
+        //fetch(`http://ec2-34-232-62-196.compute-1.amazonaws.com:3008/api?input=${input}`,{ mode: 'no-cors' })
+        fetch(`http://localhost:3008/api?input=${input}`,{ mode: 'no-cors' })
         .then(res => res.json())
         .then(({data,corrected}) => {
             //if the server autocorrects the input, put the corrected input into state

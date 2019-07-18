@@ -4,6 +4,7 @@ const fs = require('fs');
 const axios = require('axios');
 const findWord = require('./findword.js')
 const key = require('./key')
+//const https = require('https')
 
 
 const app = express();
@@ -46,3 +47,9 @@ app.get('/api', (req, res) => {
 });
 
 app.listen(port,() => console.log('serving at port ' + port));
+// https.createServer({
+//     key: fs.readFileSync('server.key'),
+//     cert: fs.readFileSync('server.cert')
+// }, app).listen(3000, () => {
+//     console.log('Listening...')
+// })
