@@ -33,7 +33,7 @@ app.get('/api', (req, res) => {
     }
 
     //call to giphy
-    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=5`)
+    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${key.key}&q=${input}&limit=10`)
         .then(gifs => {
             res.end(JSON.stringify({
                 data: gifs.data.data,
