@@ -10,9 +10,15 @@
 
 2. **Build a webpack bundle**
 
+    dev
    ```sh
    yarn run build
    ```
+    prod
+   ```sh
+   yarn run pack
+   ```
+
 2. **Start the development server**
 
    ```sh
