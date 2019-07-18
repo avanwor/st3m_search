@@ -15,9 +15,11 @@ const findWord = (input, dict) => {
     //++anyway to keep one vowel variable at a time (assume only one typo, then two, then three), then search on those sets?
     //++check out fib tabulation for fast algo
     const recurseWord = (word, i=0) => {
-        if (i >= word.length) {
-            return
+        //limit the function to handle 5 vowels to prevent server from overloading and stay within acceptable response time
+        if (Object.keys(possibleWords).length > 3125) {
+            i = word.length + 1
         }
+        if (i >= word.length) return
         if (vowels[word[i]]) {
             for (let key in vowels) {
                 let changedVowel = word.substring(0,i) + key + word.substring(i+1)

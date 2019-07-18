@@ -39,6 +39,7 @@ class App extends React.Component {
                 showing: showing
             })
         })
+        .catch(err => console.log(err))
     }
 
     imgOnClick = (url) => {
