@@ -30,8 +30,8 @@ class App extends React.Component {
         const input = formData.get("input").toLowerCase();
         
         //send request to server with user input
-        //fetch(`http://ec2-34-232-62-196.compute-1.amazonaws.com:3008/api?input=${input}`,{})
         fetch(`http://localhost:3008/api?input=${input}`,{})
+        //fetch(`https://www.datasy.io/api?input=${input}`,{})
         .then(res => res.json())
         .then(({data,corrected}) => {
             //if the server autocorrects the input, put the corrected input into state
