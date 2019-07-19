@@ -35,6 +35,6 @@ const Result = ({ gifs, imgOnClick, showing, clicked, removeOverlay }) => {
             </div>
         </div>
     );
-};
+}
 
 export default Result;

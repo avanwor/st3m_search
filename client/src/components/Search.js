@@ -8,7 +8,7 @@ const Search = ({ handleSubmit }) => {
           <input className="input" id="input" name="input" type="text" placeholder="Search gifs on Giffy..." />
           <button><i className="fa fa-search"></i></button>
       </form>
-    )
-};
+    );
+}
 
 export default Search;

@@ -10,11 +10,6 @@
 
 2. **Build a webpack bundle**
 
-    dev
-   ```sh
-   yarn run build
-   ```
-    prod
    ```sh
    yarn run pack
    ```
@@ -26,10 +21,11 @@
    ```
 
 ## 🤷‍ Assumptions and 💪 Decisions 
-1. There will be mobile users around the world. Autocorrect should be performed on a server. 
-    a. Running binary search on a dictionary is too intensive for mobile devices
-    b. There's no algo yet that can compress a unix dictionary enough to send quickly over a 3g network.  
-        i. Webpack bundle is large as well, but have to send it. SERVER SIDE RENDERING??
-2. We'll have sufficient memory on the server to run fs.readFile on 3mb file. Creating a read stream is not necessary.
+1. Spaces do not need to be supported in search
+2. Users only want max of 10 gifs based on their search
+3. For a search term, a max of 5 vowels will need replacement. 
 
-## 🧐 What's inside?
+## 🧐 With more time
+1. Get a TLS cert to support the upgrade-insecure-requests CSP and prevent mixed content errors caused by the giphy API. 
+2. Implement postgres db with dictionary to take advantage of a btree index and binary search. Evaluate LSTM for autocorrect.
+3. Implement compression on server to further reduce bundle size.
